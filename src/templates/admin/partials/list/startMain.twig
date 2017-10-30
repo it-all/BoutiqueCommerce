@@ -1,0 +1,37 @@
+<main>
+    <div id="scrollingTableContainer">
+        <table class="scrollingTable sortable">
+            <thead>
+                <tr>
+                    <th colspan="10">
+                        {{ title }} ({{ numResults }})
+                        {% if insertLink %}
+                            <a class="tableCaptionAction" href="{{ path_for(insertLink.route) }}">{{ insertLink.text }}</a>
+                        {% endif %}
+
+                        {% include 'admin/partials/list/filterForm.twig' %}
+                    </th>
+                </tr>
+                {% set break = false %}
+                {% for row in results if not break %}
+                <tr class="sortable-header-row">
+                    {% set colCount = 0 %}
+                    {% for key in row|keys %}
+                        {% if key == sortColumn %}
+                            {% set thClass = (sortByAsc) ? 'sorttable_sorted' : 'sorttable_sorted_reverse' %}
+                        {% else %}
+                            {% set thClass = '' %}
+                        {% endif %}
+
+                        <th class="{{ thClass }}">{{ key }}</th>
+                        {% set colCount = colCount + 1 %}
+                    {% endfor %}
+
+                    {% if addDeleteColumn %}
+                        <th class="sorttable_nosort">X</th>
+                    {% endif %}
+                </tr>
+                {% set break = true %}
+            {% endfor %}
+            </thead>
+            <tbody id="tbody">

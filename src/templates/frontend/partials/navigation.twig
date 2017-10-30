@@ -1,0 +1,18 @@
+	<header>
+		<nav>
+
+            {% if currentUri != '/' %}
+			<li><a href="{{ path_for(constant('ROUTE_HOME'))}}">Home</a></li>
+            {% endif %}
+
+	{% if not authentication.check %}
+			<li><a href="{{ path_for(constant('ROUTE_LOGIN'))}}">Login</a></li>
+    {% else %}
+        {% if adminLinkRoute is not defined %}
+            {% set adminLinkRoute = constant('ROUTE_ADMIN_HOME_DEFAULT') %}
+        {% endif %}
+            <li><a href="{{ path_for(adminLinkRoute) }}">Admin</a></li>
+	{% endif %}
+
+		</nav>
+	</header>

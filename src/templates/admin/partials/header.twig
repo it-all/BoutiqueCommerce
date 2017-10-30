@@ -1,0 +1,43 @@
+<header id="adminPageHeader">
+
+    {% if (authentication.check) %}
+        <nav id="adminNav">
+
+            <input type="checkbox" id="toggle-nav">
+            <label id="toggle-nav-label" for="toggle-nav">
+                <img src="/images/admin/menu-icon.png" width="20" height="20">
+            </label>
+
+            <div id="navOverlay">
+                {% include 'admin/partials/navigationMenu.twig' %}
+            </div>
+
+        </nav>
+    {% endif %}
+
+    <div id="adminPageHeaderLogo">
+        <a href="{{ path_for(constant('ROUTE_HOME')) }}">{{ businessName }}</a>
+        {% if not isLive %}
+            <span style="color: grey;">{LOCAL}</span>
+        {% endif %}
+    </div>
+
+    {% if (authentication.check) %}
+        <div id="adminPageHeaderNotice">
+            {% if adminNotice %}
+                <span class="{{ adminNotice.1 }}">&raquo; {{ adminNotice.0 }} &laquo;</span>
+            {% endif %}
+        </div>
+        <div id="adminPageHeaderGreeting">
+            Hello {{ authentication.user.name }}
+            [<a href="{{ path_for("authentication.logout")}}">logout</a>]
+        </div>
+    {% endif %}
+
+</header>
+
+{% if debug %}
+    <div id="debug">
+        {{ debug|raw }}
+    </div>
+{% endif %}

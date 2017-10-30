@@ -1,0 +1,13 @@
+<form name="filter" method="post" style="display: inline" action="{{ path_for(filterFormAction) }}">
+    SELECT WHERE
+    {% if filterErrorMessage %}
+        <span class="ffErrorMsg">{{ filterErrorMessage }}</span>
+    {% endif %}
+    <input type="text" name="{{ filterFieldName }}" value="{{ filterValue }}" size="70" maxlength="500" placeholder="field1:{op}:value 1[,field2{=}value 2,...] op in [{{ filterOpsList }}]" required>
+    <input type="submit" value="Filter">
+    {% if isFiltered %}
+        <a href="{{ path_for(resetFilterRoute) }}">reset</a>
+    {% endif %}
+    <input type="hidden" name="{{ csrf['tokenNameKey'] }}" value="{{ csrf['tokenName'] }}">
+    <input type="hidden" name="{{ csrf['tokenValueKey'] }}" value="{{ csrf['tokenValue'] }}">
+</form>

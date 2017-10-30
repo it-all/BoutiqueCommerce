@@ -1,0 +1,28 @@
+{% extends 'base.twig' %}
+
+{% block htmlHeadCss %}
+    <link href="/css/adminFlexSimple.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block htmlBodyContent %}
+
+    {% include 'admin/partials/header.twig' %}
+    {% import 'formMacro.twig' as formMacro %}
+
+    <main>
+        <div id="simpleContainer">
+            {{ formMacro.render(form) }}
+        </div>
+    </main>
+
+    {% include 'admin/partials/footer.twig' %}
+
+{% endblock %}
+{% block htmlBodyJs %}
+    {% if form.getFocusFieldId %}
+        <script type="text/javascript">
+            window.onload = document.getElementById('{{ form.getFocusFieldId }}').focus();
+        </script>
+    {% endif %}
+    <script type="text/javascript" src="/js/uiHelper.js"></script>
+{% endblock %}

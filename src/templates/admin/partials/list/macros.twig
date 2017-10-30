@@ -1,0 +1,30 @@
+{%  macro bodyRow(row, rowNumber, updateColumn, updatePermitted, updateRoute, addDeleteColumn, deletePermitted, deleteRoute)  %}
+
+        <tr id="row{{ rowId }}">
+            {% for key, value in row %}
+                {% if key == updateColumn and updatePermitted %}
+
+                    <td><a href="{{ path_for(updateRoute, {"primaryKey": attribute(row, updateColumn)}) }}" title="update">{{ value }}</a></td>
+
+                {%  else %}
+
+                    <td>{{ value }}</td>
+
+                {% endif %}
+            {% endfor %}
+
+            {% if addDeleteColumn %}
+                {%  if deletePermitted %}
+
+                    <td><a href="{{ path_for(deleteRoute, {"primaryKey": attribute(row, updateColumn)}) }}" title="delete" onclick="return confirm('Are you sure you want to delete record  {{ attribute(row, updateColumn) }}?');">X</a></td>
+
+                {% else %}
+
+                    <td>&nbsp;</td>
+
+                {% endif %}
+            {% endif %}
+
+        </tr>
+
+{% endmacro %}

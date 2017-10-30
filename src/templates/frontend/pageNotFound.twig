@@ -1,0 +1,15 @@
+{%  extends 'base.twig' %}
+
+{% block htmlHeadCss %}
+    <link href="/css/frontend.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{%  block htmlBodyContent %}
+    <section class="main">
+        <h1>{{ businessName }}</h1>
+        <h2>Your requested page was not found</h2>
+    </section>
+
+    {% include 'frontend/partials/navigation.twig' %}
+
+{%  endblock %}

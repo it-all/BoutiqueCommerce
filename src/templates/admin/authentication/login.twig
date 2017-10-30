@@ -1,0 +1,30 @@
+{% extends 'base.twig' %}
+
+{% block htmlHeadCss %}
+    <link href="/css/adminFlexSimpleNotLoggedIn.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block htmlBodyContent %}
+
+    {% include 'admin/partials/header.twig' %}
+    {% import 'formMacro.twig' as formMacro %}
+
+    <main>
+        <div id="simpleContainer">
+            <h1>Login</h1>
+            <h5>Authorized for use by {{ businessName }} employees and associates only.</h5>
+            {{ formMacro.render(form) }}
+        </div>
+    </main>
+
+    {% include 'admin/partials/footer.twig' %}
+
+{% endblock %}
+{% block htmlBodyJs %}
+    {% if form.getFocusFieldId %}
+        <script type="text/javascript">
+            window.onload = document.getElementById('{{ form.getFocusFieldId }}').focus();
+        </script>
+    {% endif %}
+    <script type="text/javascript" src="/js/uiHelper.js"></script>
+{% endblock %}
